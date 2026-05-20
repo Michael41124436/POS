@@ -5,6 +5,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Shoe Store POS</title>
   <link rel="stylesheet" href="style.css" />
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="https://js.stripe.com/v3/"></script>
 </head>
 <body>
   <div class="app-shell">
@@ -14,10 +16,40 @@
         <h1>Fast shoe checkout</h1>
         <p>Sell sneakers, boots, sandals and more with a polished checkout flow.</p>
       </div>
-      <div class="status-badge">Ready to sell</div>
+      <div class="header-controls">
+        <div class="status-badge">Ready to sell</div>
+        <button id="toggle-analytics" class="analytics-toggle">Analytics</button>
+        <button id="toggle-admin" class="admin-toggle">Admin Panel</button>
+      </div>
+      <div id="low-stock-alert" class="low-stock-alert hidden">
+        <div class="low-stock-alert-copy">
+          <strong>Low stock alert:</strong>
+          <span id="low-stock-list">Checking inventory...</span>
+        </div>
+        <button id="stock-action-button" class="stock-action-button">Review stock</button>
+      </div>
     </header>
 
-    <main>
+    <section id="login-view" class="panel login-panel">
+      <div class="section-header">
+        <div>
+          <h2>Staff Login</h2>
+          <p>Only authorized store staff can manage inventory and use the restock dashboard.</p>
+        </div>
+      </div>
+      <div class="login-fields">
+        <input id="login-username" type="text" placeholder="Username" />
+        <input id="login-password" type="password" placeholder="Password" />
+        <div class="login-actions">
+          <button id="login-button" class="login-button">Sign in</button>
+          <button id="logout-button" class="logout-button hidden">Log out</button>
+        </div>
+        <div id="login-message" class="login-message"></div>
+        <div id="user-badge" class="user-badge hidden"></div>
+      </div>
+    </section>
+
+    <main id="pos-view" class="pos-view">
       <section class="panel inventory-panel">
         <div class="section-header">
           <div>
@@ -65,7 +97,10 @@
           <div class="checkout-summary">
             <div class="total-label">Total</div>
             <div class="total-amount">$<span id="cart-total">0.00</span></div>
-            <button id="checkout">Complete sale</button>
+            <div class="checkout-actions">
+              <button id="checkout">Complete sale</button>
+              <button id="pay-button" class="restock-button">Pay with Card</button>
+            </div>
           </div>
         </div>
       </section>
@@ -79,6 +114,166 @@
           <button id="refresh-sales">Refresh</button>
         </div>
         <div id="sales-list" class="sales-list"></div>
+      </section>
+    </main>
+
+    <main id="analytics-view" class="analytics-view" style="display: none;">
+      <section class="panel analytics-panel">
+        <div class="section-header">
+          <div>
+            <h2>Sales Analytics</h2>
+            <p>Track your shoe store performance and trends.</p>
+          </div>
+          <button id="close-analytics" class="close-analytics-btn">Back to POS</button>
+        </div>
+
+        <div class="analytics-cards">
+          <div class="analytics-card">
+            <div class="card-label">Total Sales</div>
+            <div class="card-value" id="total-sales">$0.00</div>
+          </div>
+          <div class="analytics-card">
+            <div class="card-label">Orders</div>
+            <div class="card-value" id="total-orders">0</div>
+          </div>
+          <div class="analytics-card">
+            <div class="card-label">Items Sold</div>
+            <div class="card-value" id="total-items">0</div>
+          </div>
+          <div class="analytics-card">
+            <div class="card-label">Avg Order</div>
+            <div class="card-value" id="avg-order">$0.00</div>
+          </div>
+        </div>
+
+        <div class="analytics-breakdown">
+          <h3>Top Performers</h3>
+          <div class="analytics-charts">
+            <div class="chart-card">
+              <h4>Revenue (last 30 days)</h4>
+              <canvas id="revenue-chart" width="600" height="200"></canvas>
+            </div>
+            <div class="chart-card">
+              <h4>Items Sold (last 30 days)</h4>
+              <canvas id="items-chart" width="600" height="200"></canvas>
+            </div>
+          </div>
+          <table>
+            <thead>
+              <tr>
+                <th>Shoe</th>
+                <th>Sold</th>
+                <th>Revenue</th>
+              </tr>
+            </thead>
+            <tbody id="top-products"></tbody>
+          </table>
+        </div>
+      </section>
+    </main>
+
+    <div id="receipt-modal" class="receipt-modal" style="display: none;">
+      <div class="receipt-container">
+        <button class="modal-close" id="close-receipt">×</button>
+        <div id="receipt-content" class="receipt"></div>
+        <div class="receipt-actions">
+            <button id="print-receipt" onclick="window.print()">Print Receipt</button>
+            <button id="email-receipt" class="restock-button">Email Receipt</button>
+        </div>
+      </div>
+    </div>
+
+    <main id="admin-view" class="admin-view" style="display: none;">
+      <section class="panel admin-panel">
+        <div class="section-header">
+          <div>
+            <h2>Admin Dashboard</h2>
+            <p>Manage shoes, inventory and low-stock restocking from one place.</p>
+          </div>
+          <button id="close-admin" class="close-admin-btn">Back to POS</button>
+        </div>
+
+        <div class="admin-form">
+          <h3 id="form-title">Add New Shoe</h3>
+          <input id="product-id" type="hidden" />
+          <div class="form-group">
+            <label>Shoe Name</label>
+            <input id="admin-name" type="text" placeholder="e.g., Air Runner" />
+          </div>
+          <div class="form-group">
+            <label>Price</label>
+            <input id="admin-price" type="number" placeholder="e.g., 120" />
+          </div>
+          <div class="form-group">
+            <label>Stock Quantity</label>
+            <input id="admin-quantity" type="number" placeholder="e.g., 20" />
+          </div>
+          <div class="form-group">
+            <label>Style / Category</label>
+            <input id="admin-style" type="text" placeholder="e.g., Sneaker" />
+          </div>
+          <div class="form-group">
+            <label>Image URL</label>
+            <input id="admin-image" type="text" placeholder="e.g., images/air-runner.svg" />
+          </div>
+          <div class="form-actions">
+            <button id="admin-save">Save Product</button>
+            <button id="admin-cancel" class="cancel-btn">Cancel</button>
+          </div>
+        </div>
+
+        <div class="admin-products">
+          <h3>All Products</h3>
+          <table>
+            <thead>
+              <tr>
+                <th>Name</th>
+                <th>Price</th>
+                <th>Stock</th>
+                <th>Style</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody id="admin-product-list"></tbody>
+          </table>
+        </div>
+
+        <div class="admin-staff">
+          <h3>Invite New Staff</h3>
+          <p>Admins can create new staff accounts for secure checkout and inventory access.</p>
+          <div class="staff-form">
+            <input id="staff-username" type="text" placeholder="Username" />
+            <input id="staff-password" type="password" placeholder="Password" />
+            <select id="staff-role">
+              <option value="staff">Staff</option>
+              <option value="admin">Admin</option>
+            </select>
+            <button id="staff-add-button" class="restock-button">Invite user</button>
+            <div id="staff-message" class="staff-message"></div>
+          </div>
+          <div class="staff-list">
+            <h4>Existing Staff</h4>
+            <table>
+              <thead><tr><th>Username</th><th>Role</th><th>Action</th></tr></thead>
+              <tbody id="staff-table-body"></tbody>
+            </table>
+          </div>
+        </div>
+
+        <div class="admin-restock">
+          <h3>Restock Dashboard</h3>
+          <p>Quickly top up low stock items so your shoe collection stays ready to sell.</p>
+          <table>
+            <thead>
+              <tr>
+                <th>Shoe</th>
+                <th>Stock</th>
+                <th>Action</th>
+              </tr>
+            </thead>
+            <tbody id="restock-table-body"></tbody>
+          </table>
+        </div>
       </section>
     </main>
   </div>

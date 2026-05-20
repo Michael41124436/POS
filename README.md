@@ -35,3 +35,27 @@ A simple online point-of-sale application built with Node.js and Express.
 - Add product creation/editing UI
 - Add barcode scanning support
 - Add payment processing
+
+## Deploying to GitHub + Render
+
+1. Push the repository to GitHub (create a new repo, then run):
+
+```bash
+git add .
+git commit -m "Prepare for deploy"
+git branch -M main
+git remote add origin <your-git-remote-url>
+git push -u origin main
+```
+
+2. On Render (https://render.com):
+   - Create a new **Web Service** and connect your GitHub repo.
+   - Choose `Node` runtime.
+   - Build command: `npm install`
+   - Start command: `npm start`
+   - Add the required environment variables (`DEFAULT_ADMIN_PW`, SMTP and Stripe keys) in the Render Dashboard.
+   - Enable auto-deploy on push if desired.
+
+3. Alternatively, add `render.yaml` to the repo to describe the service (example `render.yaml` included).
+
+If you want, I can create the GitHub repository and push these changes for you (I will need the remote repo URL or GitHub access).

@@ -148,6 +148,66 @@ main {
   font-size: 1.15rem;
 }
 
+.product-card .stock {
+  color: var(--muted);
+  margin-bottom: 18px;
+}
+
+.product-card .stock.stock-low {
+  color: #dc2626;
+  font-weight: 700;
+}
+
+.low-stock-warning {
+  background: #fed7aa;
+  color: #7c2d12;
+  padding: 8px 12px;
+  border-radius: 12px;
+  font-size: 0.85rem;
+  font-weight: 700;
+  text-align: center;
+  margin-bottom: 12px;
+}
+
+.low-stock-warning.out-of-stock {
+  background: #fecaca;
+  color: #991b1b;
+}
+
+.low-stock-alert {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+  background: #fee2e2;
+  border: 1px solid #fca5a5;
+  color: #b91c1c;
+  padding: 18px 22px;
+  border-radius: 20px;
+  margin-top: 18px;
+}
+
+.low-stock-alert-copy {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  font-weight: 700;
+}
+
+.stock-action-button {
+  background: #b91c1c;
+  border: none;
+  color: white;
+  padding: 12px 18px;
+  border-radius: 14px;
+  cursor: pointer;
+  font-weight: 700;
+}
+
+.hidden {
+  display: none !important;
+}
+
 .product-card .price {
   font-size: 1.2rem;
   font-weight: 700;
@@ -281,6 +341,19 @@ input::placeholder {
   background: var(--surface);
 }
 
+.sale-item .print-btn {
+  margin-top: 12px;
+  padding: 10px 16px;
+  background: var(--primary);
+  color: white;
+  border: none;
+  border-radius: 12px;
+  cursor: pointer;
+  font-weight: 700;
+  font-size: 0.9rem;
+  width: 100%;
+}
+
 .sale-title {
   display: flex;
   justify-content: space-between;
@@ -306,6 +379,420 @@ input::placeholder {
   border-radius: 12px;
   background: #f8fafc;
   color: #475569;
+}
+
+.header-controls {
+  display: flex;
+  gap: 16px;
+  align-items: center;
+}
+
+.admin-toggle {
+  background: #64748b;
+  color: white;
+  padding: 12px 18px;
+  border-radius: 999px;
+  font-weight: 700;
+  border: none;
+  cursor: pointer;
+}
+
+.admin-toggle:hover {
+  background: #475569;
+}
+
+.admin-view {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 24px;
+}
+
+.admin-panel {
+  display: grid;
+  gap: 24px;
+}
+
+.admin-form {
+  background: #f8fafc;
+  border-radius: 20px;
+  padding: 20px;
+  display: grid;
+  gap: 16px;
+}
+
+.form-group {
+  display: grid;
+  gap: 8px;
+}
+
+.form-group label {
+  font-weight: 700;
+  font-size: 0.95rem;
+}
+
+.form-group input {
+  padding: 12px 16px;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  font: inherit;
+}
+
+.form-actions {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  margin-top: 8px;
+}
+
+.form-actions button {
+  padding: 14px 20px;
+  border-radius: 14px;
+  border: none;
+  cursor: pointer;
+  font-weight: 700;
+}
+
+  .login-panel {
+    margin-bottom: 24px;
+  }
+
+  .login-fields {
+    display: grid;
+    gap: 14px;
+    padding-top: 12px;
+  }
+
+  .login-fields input {
+    width: 100%;
+  }
+
+  .login-actions {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+
+  .login-button, .logout-button {
+    padding: 14px 20px;
+    border-radius: 14px;
+    border: none;
+    cursor: pointer;
+    font-weight: 700;
+    color: white;
+  }
+
+  .login-button {
+    background: #4f46e5;
+  }
+
+  .logout-button {
+    background: #ef4444;
+  }
+
+  .login-message,
+  .user-badge {
+    font-size: 0.95rem;
+  }
+
+  .login-message {
+    color: #dc2626;
+    min-height: 1.25rem;
+  }
+
+  .user-badge {
+    background: #e0f2fe;
+    border-radius: 16px;
+    padding: 12px 16px;
+    color: #075985;
+  }
+
+  .admin-restock {
+    margin-top: 32px;
+  }
+
+  .admin-restock table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 16px;
+  }
+
+  .admin-restock th,
+  .admin-restock td {
+    padding: 14px 12px;
+    border-bottom: 1px solid var(--border);
+    text-align: left;
+  }
+
+  .restock-button {
+    background: #10b981;
+    color: white;
+    border: none;
+    border-radius: 12px;
+    padding: 10px 16px;
+    cursor: pointer;
+    font-weight: 700;
+  }
+
+  .restock-button:hover {
+    opacity: 0.95;
+  }
+
+  .admin-staff {
+    margin-top: 32px;
+    background: #eef2ff;
+    border-radius: 20px;
+    padding: 20px;
+  }
+
+  .staff-form {
+    display: grid;
+    gap: 14px;
+  }
+
+  .staff-form input,
+  .staff-form select {
+    width: 100%;
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 12px 14px;
+    background: white;
+  }
+
+  .staff-message {
+    font-size: 0.95rem;
+    color: #0f172a;
+    min-height: 1.25rem;
+  }
+
+.admin-products {
+  background: #f8fafc;
+  border-radius: 20px;
+  padding: 20px;
+}
+
+.admin-products table tbody tr {
+  background: white;
+}
+
+.action-buttons {
+  display: flex;
+  gap: 8px;
+}
+
+.action-btn {
+  padding: 8px 12px;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+  font-weight: 700;
+  font-size: 0.9rem;
+}
+
+.edit-btn {
+  background: #fbbf24;
+  color: #78350f;
+}
+
+.delete-btn {
+  background: #fca5a5;
+  color: #7f1d1d;
+}
+
+.receipt-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.7);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+.receipt-container {
+  background: white;
+  border-radius: 20px;
+  padding: 32px;
+  max-width: 500px;
+  max-height: 80vh;
+  overflow-y: auto;
+  position: relative;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+}
+
+.modal-close {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  background: #e2e8f0;
+  border: none;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  font-size: 1.5rem;
+  cursor: pointer;
+}
+
+.receipt {
+  font-family: 'Courier New', monospace;
+  font-size: 0.9rem;
+  line-height: 1.6;
+  text-align: center;
+}
+
+.receipt-header {
+  margin-bottom: 24px;
+  border-bottom: 2px solid #000;
+  padding-bottom: 12px;
+}
+
+.receipt-title {
+  font-weight: 700;
+  font-size: 1.2rem;
+  margin-bottom: 8px;
+}
+
+.receipt-time {
+  font-size: 0.85rem;
+  color: #475569;
+}
+
+.receipt-items {
+  margin: 24px 0;
+  text-align: left;
+}
+
+.receipt-item {
+  display: flex;
+  justify-content: space-between;
+  padding: 8px 0;
+  border-bottom: 1px dotted #cbd5e1;
+}
+
+.receipt-item-name {
+  flex: 1;
+}
+
+.receipt-item-qty {
+  width: 40px;
+  text-align: center;
+}
+
+.receipt-item-total {
+  width: 60px;
+  text-align: right;
+}
+
+.receipt-total {
+  margin-top: 16px;
+  padding-top: 12px;
+  border-top: 2px solid #000;
+  display: flex;
+  justify-content: space-between;
+  font-weight: 700;
+  font-size: 1.1rem;
+}
+
+.receipt-actions {
+  display: grid;
+  gap: 12px;
+  margin-top: 24px;
+}
+
+#print-receipt {
+  background: var(--primary);
+  color: white;
+  padding: 14px 20px;
+  border-radius: 14px;
+  border: none;
+  cursor: pointer;
+  font-weight: 700;
+}
+
+@media print {
+  .receipt-modal,
+  .modal-close,
+  .receipt-actions {
+    display: none !important;
+  }
+
+  body {
+    background: white;
+  }
+
+  .receipt-container {
+    box-shadow: none;
+    max-width: 100%;
+    padding: 0;
+  }
+}
+
+.analytics-view {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 24px;
+}
+
+.analytics-panel {
+  display: grid;
+  gap: 24px;
+}
+
+.analytics-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 16px;
+}
+
+.analytics-card {
+  background: linear-gradient(135deg, var(--primary) 0%, #d97706 100%);
+  border-radius: 16px;
+  padding: 20px;
+  color: white;
+  display: grid;
+  gap: 12px;
+}
+
+.card-label {
+  font-size: 0.9rem;
+  opacity: 0.9;
+}
+
+.card-value {
+  font-size: 2rem;
+  font-weight: 800;
+}
+
+.analytics-breakdown {
+  background: #f8fafc;
+  border-radius: 20px;
+  padding: 20px;
+}
+
+.analytics-toggle {
+  background: #6366f1;
+  color: white;
+  padding: 12px 18px;
+  border-radius: 999px;
+  font-weight: 700;
+  border: none;
+  cursor: pointer;
+}
+
+.analytics-toggle:hover {
+  background: #4f46e5;
+}
+
+.close-analytics-btn {
+  background: #64748b;
+  color: white;
+  padding: 10px 16px;
+  border-radius: 10px;
+  border: none;
+  cursor: pointer;
+  font-weight: 700;
 }
 
 @media (max-width: 1024px) {
