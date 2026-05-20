@@ -1,0 +1,66 @@
+{
+  "products": [
+    {
+      "id": "1",
+      "name": "Air Runner",
+      "price": 120,
+      "quantity": 19,
+      "style": "Sneaker",
+      "image": "images/air-runner.svg"
+    },
+    {
+      "id": "2",
+      "name": "Classic Loafer",
+      "price": 85,
+      "quantity": 9,
+      "style": "Casual",
+      "image": "images/classic-loafer.svg"
+    },
+    {
+      "id": "3",
+      "name": "Trail Runner",
+      "price": 140,
+      "quantity": 8,
+      "style": "Sport",
+      "image": "images/trail-runner.svg"
+    },
+    {
+      "id": "4",
+      "name": "Leather Boot",
+      "price": 150,
+      "quantity": 10,
+      "style": "Boot",
+      "image": "images/leather-boot.svg"
+    },
+    {
+      "id": "5",
+      "name": "Summer Sandal",
+      "price": 45,
+      "quantity": 23,
+      "style": "Sandals",
+      "image": "images/summer-sandal.svg"
+    }
+  ],
+  "sales": [
+    {
+      "id": "433dbf52-c13f-4a2e-a1c8-70259b2a3da6",
+      "customer": "Walk-in",
+      "items": [
+        {
+          "id": "1",
+          "quantity": 1
+        },
+        {
+          "id": "5",
+          "quantity": 2
+        },
+        {
+          "id": "2",
+          "quantity": 3
+        }
+      ],
+      "total": 465,
+      "date": "2026-05-20T14:49:40.896Z"
+    }
+  ]
+}

@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Shoe Store POS</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="app-shell">
+    <header class="app-header">
+      <div>
+        <p class="brand-label">Shoe Store POS</p>
+        <h1>Fast shoe checkout</h1>
+        <p>Sell sneakers, boots, sandals and more with a polished checkout flow.</p>
+      </div>
+      <div class="status-badge">Ready to sell</div>
+    </header>
+
+    <main>
+      <section class="panel inventory-panel">
+        <div class="section-header">
+          <div>
+            <h2>Available shoes</h2>
+            <p>Tap a style, choose quantity, and check out quickly.</p>
+          </div>
+          <button id="refresh-products">Refresh</button>
+        </div>
+
+        <div class="inventory-actions">
+          <input id="product-search" type="search" placeholder="Search shoes by name or style" />
+        </div>
+
+        <div id="product-grid" class="product-grid"></div>
+      </section>
+
+      <section class="panel cart-panel">
+        <div class="section-header">
+          <div>
+            <h2>Cart</h2>
+            <p>Order summary for your shoe customer.</p>
+          </div>
+        </div>
+
+        <div class="cart-controls">
+          <select id="product-select"></select>
+          <input id="product-quantity" type="number" min="1" value="1" />
+          <button id="add-to-cart">Add</button>
+        </div>
+
+        <div class="cart-table-wrapper">
+          <table>
+            <thead>
+              <tr><th>Item</th><th>Qty</th><th>Total</th><th></th></tr>
+            </thead>
+            <tbody id="cart-items"></tbody>
+          </table>
+        </div>
+
+        <div class="checkout">
+          <div class="checkout-details">
+            <label>Customer</label>
+            <input id="customer-name" placeholder="Customer name" />
+          </div>
+          <div class="checkout-summary">
+            <div class="total-label">Total</div>
+            <div class="total-amount">$<span id="cart-total">0.00</span></div>
+            <button id="checkout">Complete sale</button>
+          </div>
+        </div>
+      </section>
+
+      <section class="panel sales-panel">
+        <div class="section-header">
+          <div>
+            <h2>Recent sales</h2>
+            <p>Keep track of the latest orders for the shoe store.</p>
+          </div>
+          <button id="refresh-sales">Refresh</button>
+        </div>
+        <div id="sales-list" class="sales-list"></div>
+      </section>
+    </main>
+  </div>
+
+  <script src="main.js"></script>
+</body>
+</html>
