@@ -5,6 +5,6 @@ services:
     plan: free
     buildCommand: npm install
     startCommand: npm start
-    repo: ""
+    repo: "https://github.com/Michael41124436/POS.git"
     branch: main
     autoDeploy: true

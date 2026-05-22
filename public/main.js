@@ -576,7 +576,7 @@ function renderLoginState() {
     loginView.classList.toggle('hidden', isLoggedIn);
   }
   if (loginButton) {
-    loginButton.classList.toggle('hidden', !isLoggedIn);
+    loginButton.classList.toggle('hidden', isLoggedIn);
   }
   if (logoutButton) {
     logoutButton.classList.toggle('hidden', !isLoggedIn);
